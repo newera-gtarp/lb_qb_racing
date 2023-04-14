@@ -15,12 +15,13 @@ import {
 import React, { FormEvent, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { path } from '../../npwd.config';
 import { NUIEvents, RacingEvents } from '../../types/Events';
 import { CreateRaceInput, GetDistanceToRaceInput, Track } from '../../types/Racing';
 import { sortedTracksAtom, tracksAtom } from '../atoms/tracks';
 import TrackCard from '../components/TrackCard';
 import fetchNui from '../utils/fetchNui';
+
+const path = '';
 
 const SetupRace = () => {
   const tracks = useRecoilValue(sortedTracksAtom);

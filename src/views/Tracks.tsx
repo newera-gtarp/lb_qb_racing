@@ -4,11 +4,12 @@ import { Divider, Fab, Stack, Tooltip, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useRecoilRefresher_UNSTABLE, useRecoilValue } from 'recoil';
-import { path } from '../../npwd.config';
 import { NUIEvents } from '../../types/Events';
 import { sortedTracksAtom } from '../atoms/tracks';
 import TrackCard from '../components/TrackCard';
 import fetchNui from '../utils/fetchNui';
+
+const path = '';
 
 const FabContainer = styled.div`
   position: absolute;

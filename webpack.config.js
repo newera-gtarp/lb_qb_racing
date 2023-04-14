@@ -57,28 +57,28 @@ module.exports = {
     clean: true,
   },
   plugins: [
-    new ModuleFederationPlugin({
-      name,
-      filename: 'remoteEntry.js',
-      exposes: {
-        './config': './npwd.config',
-      },
-      shared: {
-        ...dependencies,
-        react: {
-          singleton: true,
-          requiredVersion: dependencies.react,
-        },
-        '@emotion/react': {
-          singleton: true,
-          requiredVersion: dependencies['@emotion/react'],
-        },
-        'react-dom': {
-          singleton: true,
-          requiredVersion: dependencies['react-dom'],
-        },
-      },
-    }),
+    // new ModuleFederationPlugin({
+    //   name,
+    //   filename: 'remoteEntry.js',
+    //   exposes: {
+    //     './config': './npwd.config',
+    //   },
+    //   shared: {
+    //     ...dependencies,
+    //     react: {
+    //       singleton: true,
+    //       requiredVersion: dependencies.react,
+    //     },
+    //     '@emotion/react': {
+    //       singleton: true,
+    //       requiredVersion: dependencies['@emotion/react'],
+    //     },
+    //     'react-dom': {
+    //       singleton: true,
+    //       requiredVersion: dependencies['react-dom'],
+    //     },
+    //   },
+    // }),
     new HtmlWebpackPlugin({
       cache: false,
       template: './src/index.html',

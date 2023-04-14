@@ -12,7 +12,7 @@ import {
 import { User } from '../types/User';
 
 const QBCore = global.exports['qb-core'].GetCoreObject();
-const npwdExports = global.exports['npwd'];
+const lbPhone = global.exports['lb-phone'];
 
 RegisterNuiCB(RacingEvents.GetTracks, (_, cb) => {
   emitNet(RacingEvents.GetTracks);
@@ -68,13 +68,14 @@ RegisterNuiCB(RacingEvents.DeleteTrack, (raceId: string, cb) => {
 });
 
 onNet('qb-phone:client:UpdateLapraces', () => {
-  npwdExports.sendUIMessage(NUIEvents.UpdateData);
+  lbPhone.SendCustomAppMessage('qb-racing', { type: NUIEvents.UpdateData });
 });
 
 RegisterNuiCB(NUIEvents.GetDistanceToRace, (data: GetDistanceToRaceInput, cb) => {
   QBCore.Functions.TriggerCallback(
     QBRacingEvents.GetRacingData,
     (race: QBRace['RaceData']) => {
+      console.log('Race data', race);
       const ped = PlayerPedId();
       const coords = GetEntityCoords(ped, true);
       const raceCoords = race.Checkpoints[0].coords;

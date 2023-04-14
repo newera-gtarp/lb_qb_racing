@@ -3,7 +3,6 @@ import FormatListBulletedRoundedIcon from '@mui/icons-material/FormatListBullete
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { path } from '../../npwd.config';
 
 const Footer = () => {
   const location = useLocation();
@@ -14,7 +13,7 @@ const Footer = () => {
   };
 
   useEffect(() => {
-    setPage(location.pathname.replace(path, ''));
+    setPage(location.pathname.replace('/', ''));
   }, [location]);
 
   return (
@@ -24,7 +23,7 @@ const Footer = () => {
         value=""
         component={NavLink}
         icon={<FormatListBulletedRoundedIcon />}
-        to={`${path}`}
+        to={`/`}
       />
 
       <BottomNavigationAction
@@ -33,7 +32,7 @@ const Footer = () => {
         color="secondary"
         component={NavLink}
         icon={<AddRounded />}
-        to={`${path}/setupRace`}
+        to={`/setupRace`}
       />
 
       <BottomNavigationAction
@@ -42,7 +41,7 @@ const Footer = () => {
         color="secondary"
         component={NavLink}
         icon={<FlagCircleRounded />}
-        to={`${path}/tracks`}
+        to={`/tracks`}
       />
     </BottomNavigation>
   );

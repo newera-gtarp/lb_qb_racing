@@ -24,12 +24,12 @@ import { Box } from '@mui/system';
 import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { path } from '../../npwd.config';
 import { userAtom } from '../atoms/user';
 import { Track } from '../../types/Racing';
 import { formatTrackTime } from '../utils/racing';
 import fetchNui from '../utils/fetchNui';
 import { RacingEvents } from '../../types/Events';
+const path = '';
 
 interface TrackCardProps {
   track: Track;

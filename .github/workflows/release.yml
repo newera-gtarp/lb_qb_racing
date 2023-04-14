@@ -8,8 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      APP_NAME: npwd_qb_racing
-      APP_NICE_NAME: NPWD QB Racing App 
+      APP_NAME: lb_qb_racing
+      APP_NICE_NAME: LB QB Racing App 
     
     steps:
     - name: Get tag

@@ -7,23 +7,17 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../npwd.config';
 
 import { HashRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import App from './App';
-import image from './bg.png';
 import { NuiProvider } from 'react-fivem-hooks';
 import { RecoilRoot } from 'recoil';
 import { IPhoneSettings } from '@project-error/npwd-types';
 import i18next from 'i18next';
 import { createTheme } from '@mui/material';
 
-const Container = styled.div`
-  position: relative;
-  width: 500px;
-  height: 1000px;
-`;
+const Container = styled.div``;
 const Background = styled.div<{ src: string }>`
   background: url(${({ src }) => src});
   position: absolute;
@@ -36,10 +30,10 @@ const Background = styled.div<{ src: string }>`
 const AppContainer = styled.div`
   z-index: 2;
   position: absolute;
-  bottom: 100px;
-  left: 50px;
-  right: 50px;
-  top: 100px;
+  bottom: 40px;
+  left: 1px;
+  right: 1px;
+  top: 42px;
   display: flex;
   flex-direction: column;
   background-position: center;
@@ -73,17 +67,16 @@ const theme = createTheme({
  */
 
 const Root = () => {
-  if (process.env.REACT_APP_IN_GAME) {
-    return null;
-  }
+  // if (process.env.REACT_APP_IN_GAME) {
+  //   return null;
+  // }
 
   return (
     <HashRouter>
-      <React.Suspense fallback="Loading dev env">
+      <React.Suspense fallback="Loading app">
         <RecoilRoot>
           <NuiProvider>
             <Container>
-              <Background src={image} />
               <AppContainer>
                 <App settings={settings} i18n={i18next} theme={theme} />
               </AppContainer>
