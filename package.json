@@ -42,7 +42,7 @@
     "serve": "serve dist -p 3002",
     "clean": "rm -rf dist",
     "release": "./scripts/release.sh",
-    "prepare": "npx copyfiles README.md fxmanifest.lua client.lua ./temp/lb_qb_racing && npx copyfiles ./web/**/*.* ./temp/lb_qb_racing && npx copyfiles ./dist/**/*.* ./temp/lb_qb_racing && npx copyfiles app-icon.png ./temp/lb_qb_racing/web/dist",
+    "bundle": "npx copyfiles README.md fxmanifest.lua client.lua ./temp/lb_qb_racing && npx copyfiles ./web/**/*.* ./temp/lb_qb_racing && npx copyfiles ./dist/**/*.* ./temp/lb_qb_racing && npx copyfiles app-icon.png ./temp/lb_qb_racing/web/dist",
     "watch": "concurrently \"yarn watch:client\" \"yarn watch:server\"  \"yarn watch:nui\"",
     "watch:nui": "esbuild src/index.tsx --outdir=dist/html --watch --target=es6 --bundle --loader:.png=dataurl",
     "watch:client": "esbuild client/client.ts --bundle --watch --outfile=dist/client.js",
