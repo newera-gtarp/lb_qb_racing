@@ -45,12 +45,16 @@ onNet(RacingEvents.GetRaces, async () => {
 onNet(RacingEvents.GetUser, async () => {
   const src = source;
   const player = QBCore.Functions.GetPlayer(src);
-  emitNet(RacingEvents.SendUser, src, player.PlayerData);
+  emitNet(RacingEvents.SendUser, src, player?.PlayerData);
 });
 
 onNet(RacingEvents.DeleteTrack, async (raceId: string) => {
   const src = source;
   const player = QBCore.Functions.GetPlayer(src);
+
+  if (player?.PlayerData?.citizenid) {
+    return;
+  }
 
   const { affectedRows } = await MYSQL.query_async<{ affectedRows: number }>(
     'DELETE FROM lapraces WHERE creator=? AND raceid=?',
