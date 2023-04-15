@@ -2,16 +2,13 @@ import React from 'react';
 import { NuiProvider } from 'react-fivem-hooks';
 import styled from 'styled-components';
 
-import { IPhoneSettings } from '@project-error/npwd-types';
-import { i18n } from 'i18next';
-import { Theme, StyledEngineProvider, Paper, LinearProgress } from '@mui/material';
+import { StyledEngineProvider, Paper, LinearProgress } from '@mui/material';
 import ThemeSwitchProvider from './ThemeSwitchProvider';
 import Header, { HEADER_HEIGHT } from './components/Header';
 import Footer from './components/Footer';
-import { RecoilRoot } from 'recoil';
 import Routes from './Routes';
 import { DataSync } from './components/DataSync';
-import { NUIEvents } from '../types/Events';
+import { useLbPhoneSettings } from './hooks/useLbPhoneSettings';
 
 const Container = styled(Paper)`
   flex: 1;
@@ -31,18 +28,25 @@ const Content = styled.div`
   overflow: auto;
 `;
 
-interface AppProps {
-  theme: Theme;
-  i18n: i18n;
-  settings: IPhoneSettings;
-}
-
-const App = (props: AppProps) => {
+const App = () => {
+  const lbSettings = useLbPhoneSettings();
   return (
-    <RecoilRoot>
-      <StyledEngineProvider injectFirst>
-        <ThemeSwitchProvider mode={props.theme.palette.mode}>
-          <Container square elevation={0}>
+    <StyledEngineProvider injectFirst>
+      <ThemeSwitchProvider mode={lbSettings?.display.theme ?? 'light'}>
+        <Container square elevation={0}>
+          <React.Suspense
+            fallback={
+              <LinearProgress
+                color="primary"
+                sx={{ position: 'absolute', top: 0, left: 0, width: '100%' }}
+              />
+            }
+          >
+            <DataSync />
+          </React.Suspense>
+
+          <Header>Racing</Header>
+          <Content>
             <React.Suspense
               fallback={
                 <LinearProgress
@@ -51,33 +55,19 @@ const App = (props: AppProps) => {
                 />
               }
             >
-              <DataSync />
+              <Routes />
             </React.Suspense>
-
-            <Header>Racing</Header>
-            <Content>
-              <React.Suspense
-                fallback={
-                  <LinearProgress
-                    color="primary"
-                    sx={{ position: 'absolute', top: 0, left: 0, width: '100%' }}
-                  />
-                }
-              >
-                <Routes />
-              </React.Suspense>
-            </Content>
-            <Footer />
-          </Container>
-        </ThemeSwitchProvider>
-      </StyledEngineProvider>
-    </RecoilRoot>
+          </Content>
+          <Footer />
+        </Container>
+      </ThemeSwitchProvider>
+    </StyledEngineProvider>
   );
 };
 
-const WithProviders: React.FC<AppProps> = (props) => (
+const WithProviders: React.FC = () => (
   <NuiProvider>
-    <App {...props} />
+    <App />
   </NuiProvider>
 );
 

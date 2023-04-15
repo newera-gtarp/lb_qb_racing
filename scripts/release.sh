@@ -10,8 +10,8 @@ mkdir -p ./temp/$RESOURCE
 
 cp README.md fxmanifest.lua client.lua ./temp/$RESOURCE
 cp -r ./web ./temp/$RESOURCE
-cp -r ./dist ./temp/$RESOURCE/dist # Copy files
-
+cp -r ./dist ./temp/$RESOURCE/dist
+cp app-icon.png ./temp/$RESOURCE/web/dist
 
 echo "$PREFIX Zipping it up: $RESOURCE.zip"
 
